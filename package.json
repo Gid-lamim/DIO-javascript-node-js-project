@@ -1,0 +1,23 @@
+{
+  "name": "dio-javascript-node",
+  "version": "1.0.0",
+  "description": "Aplicando o Estilo Arquitetural REST com Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gid-lamim/DIO-javascript-node-js-project.git"
+  },
+  "keywords": [
+    "node",
+    "javascript"
+  ],
+  "author": "Gid-lamim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gid-lamim/DIO-javascript-node-js-project/issues"
+  },
+  "homepage": "https://github.com/Gid-lamim/DIO-javascript-node-js-project#readme"
+}
