@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Gid-lamim/DIO-javascript-node-js-project#readme",
   "dependencies": {
+    "express": "^4.18.1",
     "gitignore": "^0.7.0"
   },
   "devDependencies": {
