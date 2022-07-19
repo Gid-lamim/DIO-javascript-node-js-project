@@ -5,7 +5,9 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "node ./",
-    "build": "tsc --build"
+    "build": "tsc --build",
+    "dev" : "ts-node-dev   --respawn --transpile-only --ignore-watch node_modules --no-notify src/index.ts"
+
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^18.0.5",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.4"
   }
 }
