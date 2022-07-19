@@ -25,4 +25,13 @@ userRoute.get('/users/:uuid', (req:Request, res:Response, next:NextFunction)=>{
     const uuid = req.params.uuid;
     res.sendStatus(200);
 });
+
+//now let's create a route to create a new user.
+//to use POST we need postman or other apps. We can't use the browser.
+userRoute.post('/users', (req:Request, res:Response, next:NextFunction)=>{
+    const newUser = req.body;
+    
+    res.status(201).send(newUser);
+});
+
 export default userRoute;

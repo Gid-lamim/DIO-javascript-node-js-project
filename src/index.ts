@@ -3,6 +3,10 @@ import userRoute from "./routes/users.route";
 
 const app = express();
 
+//basic setup for express
+app.use(express.json()); //this will enable the code to understand json bodies
+app.use(express.urlencoded({extended:true}));
+
 app.use(userRoute);
 
 app.get('/status', (req: Request, res: Response, next: NextFunction)=>{
