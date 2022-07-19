@@ -17,4 +17,12 @@ userRoute.get('/users', (req:Request, res:Response, next:NextFunction)=>{
     res.status(200).send({users});
 });
 
+//this route will be used o locate a user by its id.
+//with express, we use ':' to say that the next part of the url is dynamic(variable)
+userRoute.get('/users/:uuid', (req:Request, res:Response, next:NextFunction)=>{
+    //req.params will give me the value entered in the url.
+    //for example: http:localhost:3000/users/1234 will have 1234 as uuid
+    const uuid = req.params.uuid;
+    res.sendStatus(200);
+});
 export default userRoute;
