@@ -1,6 +1,8 @@
 import { Router, Request, Response, NextFunction} from "express";
 
 /*operations we want to perform
+    CRUD Create, read, update and delete
+
     get / users    
     get /users/:uuid   get user by id
     post /users    save new user
@@ -37,6 +39,11 @@ userRoute.post('/users', (req:Request, res:Response, next:NextFunction)=>{
 userRoute.put('/users/:uuid', (req:Request <{uuid: string}>, res:Response, next:NextFunction)=>{
     const uuid = req.params.uuid;
     res.status(200).send({uuid});
+});
+
+userRoute.delete('/users/:uuid', (req:Request <{uuid: string}>, res:Response, next:NextFunction)=>{
+    const uuid = req.params.uuid;
+    res.sendStatus(200);
 });
 
 export default userRoute;
