@@ -24,11 +24,14 @@ userRoute.get('/users', async (req:Request, res:Response, next:NextFunction)=>{
 
 //this route will be used o locate a user by its id.
 //with express, we use ':' to say that the next part of the url is dynamic(variable)
-userRoute.get('/users/:uuid', (req:Request<{uuid:string}>, res:Response, next:NextFunction)=>{
+userRoute.get('/users/:uuid', async (req:Request<{uuid:string}>, res:Response, next:NextFunction)=>{
     //req.params will give me the value entered in the url.
     //for example: http:localhost:3000/users/1234 will have 1234 as uuid
+    
     const uuid = req.params.uuid;
-    res.sendStatus(200);
+    const user = await userRepository.findByUuid(uuid);
+
+    res.status(200).send(user);
 });
 
 //now let's create a route to create a new user.
