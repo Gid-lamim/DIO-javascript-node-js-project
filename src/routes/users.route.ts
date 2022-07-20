@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction} from "express";
+import userRepository from "../repositories/user.repository";
 
 /*operations we want to perform
     CRUD Create, read, update and delete
@@ -14,9 +15,11 @@ const userRoute = Router();
 
 //an express function needs three parameters: request, response and next function.
 // http:localhost:3000/users
-userRoute.get('/users', (req:Request, res:Response, next:NextFunction)=>{
-    const users = [{userName:'Renan'}];
-    res.status(200).send({users});
+userRoute.get('/users', async (req:Request, res:Response, next:NextFunction)=>{
+    const users = await userRepository.findAllUser();
+    //await is used to tell javascript to stop and wait for the promise before proceeding.
+    res.status(200).send({users})
+    ;
 });
 
 //this route will be used o locate a user by its id.
