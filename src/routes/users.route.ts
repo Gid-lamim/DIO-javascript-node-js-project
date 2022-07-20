@@ -43,9 +43,11 @@ userRoute.post('/users', async (req:Request, res:Response, next:NextFunction)=>{
 });
 
 
-userRoute.put('/users/:uuid', (req:Request <{uuid: string}>, res:Response, next:NextFunction)=>{
-    const uuid = req.params.uuid;
-    res.status(200).send({uuid});
+userRoute.put('/users', async (req:Request, res:Response, next:NextFunction)=>{
+    // instead of getting the uuid through the url, it will get from the request body 
+    const user = req.body;
+    await userRepository.updateUser(user)
+    res.status(200).send(user);
 });
 
 userRoute.delete('/users/:uuid', (req:Request <{uuid: string}>, res:Response, next:NextFunction)=>{

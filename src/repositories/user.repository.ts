@@ -45,7 +45,7 @@ class UserRepository{
 
     }
 
-    async createUser (user: User): Promise<{}>{
+    async createUser (user: User): Promise<string>{
         const sqlScript = `
             INSERT INTO application_user
             (
@@ -65,6 +65,21 @@ class UserRepository{
 
         return newUser.uuid;
        
+    }
+
+    async updateUser (user: User): Promise<void>{
+        const slqScript = `
+            UPDATE application_user
+            SET 
+                username = $1,
+                password = crypt($2,'my_crypt')
+            WHERE uuid = $3
+        `;
+        // basically it says, modify the username to be x and password to be y where the uuid equals w.
+
+        const values = [user.username, user.password, user.uuid];
+        await db.query(slqScript, values);
+
     }
 }
 
