@@ -44,6 +44,28 @@ class UserRepository{
         return user;
 
     }
+
+    async createUser (user: User): Promise<{}>{
+        const sqlScript = `
+            INSERT INTO application_user
+            (
+                username,
+                password
+            ) 
+            VALUES ($1, crypt($2,'my_crypt'))
+            RETURNING uuid
+        `;
+        // RETURNING uuid   -->  it asks the database to return the generated uuid
+        
+        const values = [user.username, user.password];
+        
+        const { rows } = await db.query<{uuid:string}>(sqlScript,values); //here we run the sql code to add the user. it will return a list of rows with one columns, the uuid column.
+
+        const [ newUser ] = rows; // here we get the first row of the list of rows.
+
+        return newUser.uuid;
+       
+    }
 }
 
 export default new UserRepository;

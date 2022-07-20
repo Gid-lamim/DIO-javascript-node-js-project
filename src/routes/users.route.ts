@@ -36,9 +36,10 @@ userRoute.get('/users/:uuid', async (req:Request<{uuid:string}>, res:Response, n
 
 //now let's create a route to create a new user.
 //to use POST we need postman or other apps. We can't use the browser.
-userRoute.post('/users', (req:Request, res:Response, next:NextFunction)=>{
+userRoute.post('/users', async (req:Request, res:Response, next:NextFunction)=>{
     const newUser = req.body;
-    res.status(201).send(newUser);
+    const uuidGenerated = await userRepository.createUser(newUser);
+    res.status(201).send(uuidGenerated);
 });
 
 
