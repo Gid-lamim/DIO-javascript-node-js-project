@@ -81,6 +81,18 @@ class UserRepository{
         await db.query(slqScript, values);
 
     }
+
+    async removeUser(uuid:string): Promise<void>{
+        const splScript = `
+            DELETE FROM application_user
+            WHERE uuid = $1;
+        `;
+
+        const values = [uuid];
+
+        await db.query(splScript, values);
+
+    }
 }
 
 export default new UserRepository;
