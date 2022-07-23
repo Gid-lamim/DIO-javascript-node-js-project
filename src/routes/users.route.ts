@@ -16,6 +16,9 @@ const userRoute = Router();
 //an express function needs three parameters: request, response and next function.
 // http:localhost:3000/users
 userRoute.get('/users', async (req:Request, res:Response, next:NextFunction)=>{
+     
+    console.log(req.headers); //this will show the headers
+    
     const users = await userRepository.findAllUser();
     //await is used to tell javascript to stop and wait for the promise before proceeding.
     res.status(200).send({users})

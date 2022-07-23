@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import errorHandler from "./middlewares/error-handler.middleware";
+import authorizationRoute from "./routes/authorization.route";
 import statusRoute from "./routes/status.route";
 import userRoute from "./routes/users.route";
 
@@ -12,9 +13,10 @@ app.use(express.urlencoded({extended:true}));
 //Routes imports
 app.use(userRoute);
 app.use(statusRoute);
+app.use(authorizationRoute);
 
 //errorHandlers
-app.use(errorHandler);
+app.use(errorHandler); //this will take care of all errors
 
 app.listen(3000, ()=>{ // to access this:  http://localhost:3000
     console.log('porta 3000 ');
