@@ -63,7 +63,7 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware,  async (req:Req
 
 authorizationRoute.post('/token/validate', jwtbearerAuthenticationMiddleware,  async (req:Request, res:Response, next:NextFunction)=>{
     try {
-        
+        res.status(200).send('token válido')
     } catch (error) {
         next(error);
     }
