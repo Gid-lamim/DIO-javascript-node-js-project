@@ -67,9 +67,18 @@ authorizationRoute.post('/token', async (req:Request, res:Response, next:NextFun
        //now the token will be sent back to the user as a response
        res.status(200).json({token:jwt});
 
-
-       console.log();
-        
+       /* an example of response would be:
+       eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU4NzY1MDQ3LCJzdWIiOiJhNzhlMWU3ZS1kYTEyLTQzNWYtOTAxZC05ZWRiZDhhYzg0OWIifQ.DIo-AfqPZmwwUFttZpIJS1ZHQnbfIHE6iK4o3014LdY
+      
+       now, using the JWT website (https://jwt.io/), we can translate this token and find out what information it holds:
+       the payload is:
+                {
+                    "username": "admin",
+                    "iat": 1658765047,
+                    "sub": "a78e1e7e-da12-435f-901d-9edbd8ac849b"
+                }
+        */
+       
     } catch (error) {
         next(error);
     }
