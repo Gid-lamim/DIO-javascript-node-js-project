@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import basicAuthenticationMiddleware from "./middlewares/basic-authentication.middleware";
-import bearerAuthenticationMiddleware from "./middlewares/bearer-authentication.middleware";
+import jwtbearerAuthenticationMiddleware from "./middlewares/jwtBearer-authentication.middleware";
 import errorHandler from "./middlewares/error-handler.middleware";
 import authorizationRoute from "./routes/authorization.route";
 import statusRoute from "./routes/status.route";
@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended:true}));
 
 //Routes imports
 //app.use(basicAuthenticationMiddleware);
-app.use(bearerAuthenticationMiddleware, userRoute); //this ensures that all user routes are authenticated. The access without a token is simply not allowed
+app.use(jwtbearerAuthenticationMiddleware, userRoute); //this ensures that all user routes are authenticated. The access without a token is simply not allowed
 app.use(statusRoute);
 app.use(authorizationRoute);
 

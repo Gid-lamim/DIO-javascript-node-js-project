@@ -3,6 +3,7 @@ import ForbiddenError from "../models/errors/forbidden.error.model";
 import userRepository from "../repositories/user.repository";
 import JWT from 'jsonwebtoken';
 import basicAuthenticationMiddleware from "../middlewares/basic-authentication.middleware";
+import jwtbearerAuthenticationMiddleware from "../middlewares/jwtBearer-authentication.middleware";
    
 const authorizationRoute = Router();
 
@@ -60,5 +61,13 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware,  async (req:Req
         
 })
 
+authorizationRoute.post('/token/validate', jwtbearerAuthenticationMiddleware,  async (req:Request, res:Response, next:NextFunction)=>{
+    try {
+        
+    } catch (error) {
+        next(error);
+    }
+
+})
 
 export default authorizationRoute;

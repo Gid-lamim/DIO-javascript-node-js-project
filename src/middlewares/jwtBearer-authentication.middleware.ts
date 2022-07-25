@@ -2,7 +2,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import ForbiddenError from "../models/errors/forbidden.error.model";
 import JWT from 'jsonwebtoken';
 
-function bearerAuthenticationMiddleware (req:Request, res:Response, next:NextFunction){
+function jwtbearerAuthenticationMiddleware (req:Request, res:Response, next:NextFunction){
     try {
         
         const authorizationHeader = req.headers['authorization'];
@@ -59,7 +59,7 @@ function bearerAuthenticationMiddleware (req:Request, res:Response, next:NextFun
     }
 }
 
-export default bearerAuthenticationMiddleware;
+export default jwtbearerAuthenticationMiddleware;
 
 
 
