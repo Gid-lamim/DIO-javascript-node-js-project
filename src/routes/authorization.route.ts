@@ -2,46 +2,21 @@ import { NextFunction, Request, Response, Router } from "express";
 import ForbiddenError from "../models/errors/forbidden.error.model";
 import userRepository from "../repositories/user.repository";
 import JWT from 'jsonwebtoken';
+import basicAuthenticationMiddleware from "../middlewares/basic-authentication.middleware";
    
 const authorizationRoute = Router();
 
-authorizationRoute.post('/token', async (req:Request, res:Response, next:NextFunction)=>{
+authorizationRoute.post('/token', basicAuthenticationMiddleware,  async (req:Request, res:Response, next:NextFunction)=>{
     try {
-        const authorizationHEader = req.headers['authorization']; // this will get the authorization from the request header.
-        //now I need to check wheather the authorization exists or not.
-        if (!authorizationHEader) {
-            throw new ForbiddenError('Credencias não informadas');
-            //in the real world, it's not a good idea to use intuitive messages like this one. 
+
+        const user = req.user;
+
+        //as a precaution, let's check whether the user exists
+        if(!user){
+            throw new ForbiddenError("Usuário não informado");
         }
 
-        //'Basic YWRtaW46YWRtaW4   the authentication will come this way, separated by a space.
-        // we need to use destructuring to get the two values. 
-        const [authenticationType, token ] = authorizationHEader.split(' ');
-
-        //now we need if the authentication type is Basic and the token exists
-        if (authenticationType !== 'Basic' || !token){
-            throw new ForbiddenError('Tipo de autenticação inválido');
-        }
-
-       const tokenContent = Buffer.from(token, 'base64').toString('utf-8'); 
-       
-       //the toke will be converted to user:password  ex: admin:admin
-       const [username, password] = tokenContent.split(':');
-       
-       //check if the username and password were given
-       if (!username || !password){
-        throw new ForbiddenError('Usuário e senha não preenchidos');
-       }
-
-       //it'll look for this user in the database now.
-       const user = await userRepository.findUserByUsernameAndPassword(username,password); 
-       
-       //user is possibly null, so I need to take care of that first.
-       if(!user){
-        throw new ForbiddenError('usuário ou senha inválidos');
-       }
-
-       /* Here we have some signature options.
+        /* Here we have some signature options.
 
             Issuer (iss)
             Subject (sub)
@@ -78,7 +53,7 @@ authorizationRoute.post('/token', async (req:Request, res:Response, next:NextFun
                     "sub": "a78e1e7e-da12-435f-901d-9edbd8ac849b"
                 }
         */
-       
+
     } catch (error) {
         next(error);
     }

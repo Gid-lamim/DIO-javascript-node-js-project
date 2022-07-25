@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
+import basicAuthenticationMiddleware from "./middlewares/basic-authentication.middleware";
 import errorHandler from "./middlewares/error-handler.middleware";
 import authorizationRoute from "./routes/authorization.route";
 import statusRoute from "./routes/status.route";
@@ -11,6 +12,7 @@ app.use(express.json()); //this will enable the code to understand json bodies
 app.use(express.urlencoded({extended:true}));
 
 //Routes imports
+app.use(basicAuthenticationMiddleware);
 app.use(userRoute);
 app.use(statusRoute);
 app.use(authorizationRoute);
