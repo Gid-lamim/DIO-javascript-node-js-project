@@ -1,7 +1,7 @@
 //this file is responsible for the database setup
 //it's simple
 
-import { Pool } from "pg";
+import { Pool } from 'pg';
 import dbKey from "./dbKey";
 
 const connectionString = dbKey;
