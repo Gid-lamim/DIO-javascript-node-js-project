@@ -1,24 +1,26 @@
 # DIO-javascript-node-js-project
 ---
+### Aplicando o Estilo Arquitetural REST com Node.js - Criando um projeto com API de CRUDE para usuários.
+
 Este é um projeto desenvolvido durante algumas lives para dissiminação de conhecimento dentro da DIO, uma plataforma de cursos gratuíta que todo DEV deveria conhecer! 😉
 
-Aplicando o Estilo Arquitetural REST com Node.js - Criando um projeto com API de CRUDE para usuários
+agradecimentos ao instrutor: @[RenanJPaula](https://github.com/RenanJPaula)
 
-foi usado como banco de dados o ElephantSQL. A partir de SQL e Express, foi criado um projeto q consegue visualizar , criar, deletar e modificar usuários
+Para isso foi usado como banco de dados o ElephantSQL. A partir de SQL e Express, foi criado um projeto que consegue visualizar , criar, deletar e modificar usuários
 
 ---
-Composição do nosso projeto
+## Composição do nosso projeto
 
 Neste projeto Temos alguns Endpoints Base que podem ser extendidos da forma mais adequada para seu contexto.
 
 São eles:
-###Autenticação
+### Autenticação
 
     POST /token               --> cria um token com expiração de 10 minutos usando autenticação 'basic'.
     POST /token/validate      --> verifica se o token ainda é válido. e também verifica em quantos minutos ele irá expirar.
     
 
-###Usuários (requer autenticação bearer com o token)
+### Usuários (requer autenticação bearer com o token)
 
     GET /users                 --> obtém um lista com usuários
     GET /users/:uuid           --> encontra usuário por uuid
@@ -28,7 +30,7 @@ São eles:
 
 
 ---
-##instruções de autenticação
+## instruções de autenticação
  
 1 - para saber se está funcionando:
     use o método GET no end point  ./status
