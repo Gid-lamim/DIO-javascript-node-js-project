@@ -44,27 +44,39 @@ São eles:
 
 ## encontrar usuário pelo uuid (deverá estar autenticado)
 
-    Colocar o uuid no endpoint./users com o método GET Ex: ./users/a78e1e7e-da12-435f-901d-9edbd8ac849b
+Colocar o uuid no endpoint./users com o método GET. 
+
+Ex: 
+	
+	./users/a78e1e7e-da12-435f-901d-9edbd8ac849b
 
 ## adicionar usuário (deverá estar autenticado)
 
-    Usando o método POST no end point ./users, colocar o novo usuário no corpo JSON. E retornará o uuid do novo usuário.
-        Ex:
-            {
+Usando o método POST no end point ./users, colocar o novo usuário no corpo JSON. E retornará o uuid do novo usuário.
+     
+Ex:
+           
+	 {
 	            "username":"Jalamina Dasilvs",
 	            "password": "elephant"
-            }
+         }
 
 ## editar usuário (deverá estar autenticado)
 
-    Usando o método PUT no end point ./users, colocar o usuário no corpo JSON. Ele modificará o usuário que tem o mesmo uuid do usuário do corpo JSON.
-        Ex:
-            {
+Usando o método PUT no end point ./users, colocar o usuário no corpo JSON. Ele modificará o usuário que tem o mesmo uuid do usuário do corpo JSON.
+
+Ex:
+            
+	{
                 "username": "Belarmino dasilvs",
                 "uuid": "b147e93f-d6af-4c1b-903c-c2e0c4ca7381", 
                 "password": "amonia"
-		    }
+	}
 
 ## Deletar usuário (deverá estar autenticado)
 
-    Usando o método DELETE no end point ./users, colocar o uuid no end point. Ex: ./users/a78e1e7e-da12-435f-901d-9edbd8ac849b
+Usando o método DELETE no end point ./users, colocar o uuid no end point. 
+    
+Ex: 
+
+	./users/a78e1e7e-da12-435f-901d-9edbd8ac849b
