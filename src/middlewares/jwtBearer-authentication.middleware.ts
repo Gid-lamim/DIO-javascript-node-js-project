@@ -39,7 +39,9 @@ function jwtbearerAuthenticationMiddleware (req:Request, res:Response, next:Next
                 }
 
                 const userUuid = tokenPayload.sub;
-                const username = tokenPayload.username; 
+                const username = tokenPayload.username;
+                const expiresIn = tokenPayload.exp;
+
 
                 /*now we create an object for the user 
                     it has to be like this:
@@ -51,7 +53,7 @@ function jwtbearerAuthenticationMiddleware (req:Request, res:Response, next:Next
 
                 */
 
-                const user = {uuid: userUuid, username: username}
+                const user = {uuid: userUuid, username: username, expiresIn:expiresIn}
 
                 req.user = user;
 

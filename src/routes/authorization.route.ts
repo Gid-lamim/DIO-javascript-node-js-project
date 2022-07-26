@@ -1,13 +1,16 @@
 import { NextFunction, Request, Response, Router } from "express";
 import ForbiddenError from "../models/errors/forbidden.error.model";
 import userRepository from "../repositories/user.repository";
-import JWT from 'jsonwebtoken';
+import JWT, { SignOptions } from 'jsonwebtoken';
 import basicAuthenticationMiddleware from "../middlewares/basic-authentication.middleware";
 import jwtbearerAuthenticationMiddleware from "../middlewares/jwtBearer-authentication.middleware";
+import { time } from "console";
    
 const authorizationRoute = Router();
 
+
 authorizationRoute.post('/token', basicAuthenticationMiddleware,  async (req:Request, res:Response, next:NextFunction)=>{
+    //this will use a basic authentication to generate a token that will later be used to access the user routes 
     try {
 
         const user = req.user;
@@ -32,13 +35,25 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware,  async (req:Req
             https://auth0.com/blog/json-web-token-signing-algorithms-overview/
                 
        */
-      
+      /* expiresIn?: string | number | undefined;
+         expressed in seconds or a string describing a time span [zeit/ms](https://github.com/zeit/ms.js).  
+         Eg: 60, "2 days", "10h", "7d" */
+   
+        function sec (minutes: number){
+            //this function will turn minutes into seconds
+            //1m = 60s 
+            const time = minutes * 60; 
+            return time;
+        }
+
        const jwtPayload = {username: user.username};
-       const jwtOptions = {subject: user.uuid};
+       const jwtOptions:SignOptions = {subject: user.uuid, expiresIn: sec(10) };
        const secretKey = 'my_secret_key'; 
 
        //the following line will generate the jwt token
        const jwt = JWT.sign(jwtPayload, secretKey, jwtOptions);
+
+       //the time in the token is given as unix timestamp https://www.unixtimestamp.com/
 
        //now the token will be sent back to the user as a response
        res.status(200).json({token:jwt});
@@ -63,7 +78,12 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware,  async (req:Req
 
 authorizationRoute.post('/token/validate', jwtbearerAuthenticationMiddleware,  async (req:Request, res:Response, next:NextFunction)=>{
     try {
-        res.status(200).send('token válido')
+        const now = Math.round(new Date().getTime() /1000); //given in milliseconds
+        const expiresIn:number =  Math.round((req.user.expiresIn - now)/60);
+
+
+        res.status(200).send(`Seu token irá expirar em: ${expiresIn} minutos`);
+
     } catch (error) {
         next(error);
     }
